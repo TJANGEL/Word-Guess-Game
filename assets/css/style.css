@@ -29,12 +29,16 @@ body {
 }
 
 .col-md-5 {
-    border: 5px dashed red;
+    border: 8px solid maroon;
     padding: 20px 10px;
 }
 
+#wins, #guesses, #lettersGuessed {
+  text-align: left;
+}
+
 /* NOT MY CODE */
-/* Variabes  
+/* Variables  
 $orange: #ffa600;
 $green: #c1d72e;
 $blue: #82d2e5;
