@@ -6,6 +6,8 @@ var words = [
     "pennywise",
     "clowns",
     "ghosts",
+    "samara",
+    "michael-myers"
 ];
 
 var word = words[Math.floor(Math.random() * words.length)];
@@ -122,7 +124,7 @@ for (var j = 0; j < word.length; j++) {
 //     }
 
 
-//      // Hangman
+//     // Hangman
 //     canvas =  function(){
 
 //       myStickman = document.getElementById("stickman");

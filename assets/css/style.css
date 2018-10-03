@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin; 0;
+}
+
 .jumbotron {
     color: orange;
     background: black;
@@ -20,21 +25,36 @@ body {
     font-size: 60px;
 }
 
+#instructions {
+  font-size: 30px;
+}
+
 .container-main {
     text-align: center;
     margin-left: 260px;
-    font-size: 26px;
-    color: lightgray;
+    color: orange;
     font-family: 'Concert One', cursive;
 }
 
 .col-md-5 {
     border: 8px solid maroon;
+    font-size: 30px;
     padding: 20px 10px;
 }
 
 #wins, #guesses, #lettersGuessed {
   text-align: left;
+}
+
+#footer {
+  text-align: center;
+  Padding: 20px;
+  margin: 0 auto;
+  margin-top: 100px;
+  background: black;
+  clear: both;
+  color: RED;
+  font-family: 'Chicle'
 }
 
 /* NOT MY CODE */
