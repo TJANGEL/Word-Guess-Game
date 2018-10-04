@@ -1,34 +1,85 @@
-var words = [
+// if right, push to right array
+// if wrong, push to wrong array
+// Create array of names
+var word = [
     "freddy",
     "jason",
     "dracula",
     "frankenstein",
     "pennywise",
-    "clowns",
-    "ghosts",
+    "clown",
+    "ghost",
     "samara",
-    "michael-myers"
+    "michael myers"
 ];
 
-var word = words[Math.floor(Math.random() * words.length)];
+// Choose word randomly
+var randNum = Math.floor(Math.random() * word.length);
+var chosenWord = word[randNum];
+var rightWord = [];
+var wrongWord = [];
+var underScore = [];
 
-var answerArray = [];
-for (var i = 0; i < word.length; i++) {
-    answerArray[i] = "_";
+// testing
+console.log(chosenWord);
+
+var currentName = document.getElementById('currentName');
+var lettersGuessed = document.getElementById('lettersGuessed');
+
+// Create underscores based on word length
+var generateUnderscore = () => {
+    for (var i = 0; i < chosenWord.length; i++) {
+        underScore.push('_');
+    }
+    return underScore;
 }
 
-var remainingLetters = word.length;
+// testing
+console.log(generateUnderscore());
 
-// Shows user's current progress:
-(answerArray.join(" "));
+// Get users guess
+document.addEventListener('keypress', (event) => {
+    var keyCode = event.keyCode;
+    var keyWord = String.fromCharCode(keyCode);
+    // if users guess is right
+    if (chosenWord.indexOf(keyWord) > -1) {
+        // add to rightWord Array
+        rightWord.push(keyWord);
+        // replace underscore with correctly guessed letter
+        underScore[chosenWord.indexOf(keyWord)] = keyWord;
+        currentName[0].innerHTML = underScore.join(' ');
+        // lettersGuessed[0].innerHTML = wrongWord;
+        // Checks to see if user word matches guesses
+        if (underScore.join('') == chosenWord) {
+           alert('You Win!');
+        }
+    } else {
+        wrongWord.push(keyWord);
+        console.log(wrongWord);
+    }
+});
+
+// wrongWord.push(keyWord);
+// var lettersGuessed = document.getElementById('lettersGuessed');
+
+
+// var answerArray = [];
+// for (var i = 0; i < chosenWord.length; i++) {
+//     answerArray[i] = "_";
+// }
+
+// var remainingLetters = word.length;
+
+// // Shows user's current progress:
+// (answerArray.join(" "));
 
 // Updates game status after user guesses letter:
-for (var j = 0; j < word.length; j++) {
-    if (word[j] === guess) {
-        answerArray[j] = guess;
-        remainingLetters--;
-    }
-}
+// for (var j = 0; j < word.length; j++) {
+//     if (word[j] === guess) {
+//         answerArray[j] = guess;
+//         remainingLetters--;
+//     }
+// }
 // NOT MY CODE
 // window.onload = function () {
 
