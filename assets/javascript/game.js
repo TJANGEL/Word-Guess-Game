@@ -1,7 +1,7 @@
-// if right, push to right array
-// if wrong, push to wrong array
+// Global Variables
+// ====================================================
 // Create array of names
-var word = [
+let word = [
     "freddy",
     "jason",
     "dracula",
@@ -14,21 +14,26 @@ var word = [
 ];
 
 // Choose word randomly
-var randNum = Math.floor(Math.random() * word.length);
-var chosenWord = word[randNum];
-var rightWord = [];
-var wrongWord = [];
-var underScore = [];
+let randNum = Math.floor(Math.random() * word.length);
+let chosenWord = word[randNum];
+let rightWord = [];
+let wrongWord = [];
+let underScore = [];
+let lettersGuessed = [];
+let guesses = 6;
+
+// Dom manipulation
+let docUnderScore = document.getElementById('underscore');
+let doclettersGuessed = document.getElementById('lettersGuessed');
 
 // testing
 console.log(chosenWord);
 
-var currentName = document.getElementById('currentName');
-var lettersGuessed = document.getElementById('lettersGuessed');
-
+// Main
+// ==================================================================
 // Create underscores based on word length
-var generateUnderscore = () => {
-    for (var i = 0; i < chosenWord.length; i++) {
+let generateUnderscore = () => {
+    for (let i = 0; i < chosenWord.length; i++) {
         underScore.push('_');
     }
     return underScore;
@@ -39,42 +44,43 @@ console.log(generateUnderscore());
 
 // Get users guess
 document.addEventListener('keypress', (event) => {
-    var keyCode = event.keyCode;
-    var keyWord = String.fromCharCode(keyCode);
+    let keyWord = String.fromCharCode(keyCode);
     // if users guess is right
     if (chosenWord.indexOf(keyWord) > -1) {
         // add to rightWord Array
         rightWord.push(keyWord);
         // replace underscore with correctly guessed letter
         underScore[chosenWord.indexOf(keyWord)] = keyWord;
-        currentName[0].innerHTML = underScore.join(' ');
-        // lettersGuessed[0].innerHTML = wrongWord;
+        docUnderScore[0].innerHTML = underScore.join(' ');
+        doclettersGuessed[0].innerHTML = lettersGuessed;
         // Checks to see if user word matches guesses
         if (underScore.join('') == chosenWord) {
            alert('You Win!');
         }
     } else {
         wrongWord.push(keyWord);
+        // testing
         console.log(wrongWord);
     }
 });
 
+// docUnderScore[0].innerHTML = generateUnderscore().join(' ');
 // wrongWord.push(keyWord);
-// var lettersGuessed = document.getElementById('lettersGuessed');
+// let lettersGuessed = document.getElementById('lettersGuessed');
 
 
-// var answerArray = [];
-// for (var i = 0; i < chosenWord.length; i++) {
+// let answerArray = [];
+// for (let i = 0; i < chosenWord.length; i++) {
 //     answerArray[i] = "_";
 // }
 
-// var remainingLetters = word.length;
+// let remainingLetters = word.length;
 
 // // Shows user's current progress:
 // (answerArray.join(" "));
 
 // Updates game status after user guesses letter:
-// for (var j = 0; j < word.length; j++) {
+// for (let j = 0; j < word.length; j++) {
 //     if (word[j] === guess) {
 //         answerArray[j] = guess;
 //         remainingLetters--;
@@ -83,34 +89,34 @@ document.addEventListener('keypress', (event) => {
 // NOT MY CODE
 // window.onload = function () {
 
-//     var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+//     let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 //           'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
 //           't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-//     var categories;         // Array of topics
-//     var chosenCategory;     // Selected catagory
-//     var getHint ;          // Word getHint
-//     var word ;              // Selected word
-//     var guess ;             // Geuss
-//     var geusses = [ ];      // Stored geusses
-//     var lives ;             // Lives
-//     var counter ;           // Count correct geusses
-//     var space;              // Number of spaces in word '-'
+//     let categories;         // Array of topics
+//     let chosenCategory;     // Selected catagory
+//     let getHint ;          // Word getHint
+//     let word ;              // Selected word
+//     let guess ;             // Geuss
+//     let geusses = [ ];      // Stored geusses
+//     let lives ;             // Lives
+//     let counter ;           // Count correct geusses
+//     let space;              // Number of spaces in word '-'
 
 //     // Get elements
-//     var showLives = document.getElementById("mylives");
-//     var showCatagory = document.getElementById("scatagory");
-//     var getHint = document.getElementById("hint");
-//     var showClue = document.getElementById("clue");
+//     let showLives = document.getElementById("mylives");
+//     let showCatagory = document.getElementById("scatagory");
+//     let getHint = document.getElementById("hint");
+//     let showClue = document.getElementById("clue");
 
 
 
 //     // create alphabet ul
-//     var buttons = function () {
+//     let buttons = function () {
 //       myButtons = document.getElementById('buttons');
 //       letters = document.createElement('ul');
 
-//       for (var i = 0; i < alphabet.length; i++) {
+//       for (let i = 0; i < alphabet.length; i++) {
 //         letters.id = 'alphabet';
 //         list = document.createElement('li');
 //         list.id = 'letter';
@@ -123,7 +129,7 @@ document.addEventListener('keypress', (event) => {
 
 
 //     // Select Catagory
-//     var selectCat = function () {
+//     let selectCat = function () {
 //       if (chosenCategory === categories[0]) {
 //         catagoryName.innerHTML = "The Chosen Category Is Premier League Football Teams";
 //       } else if (chosenCategory === categories[1]) {
@@ -138,7 +144,7 @@ document.addEventListener('keypress', (event) => {
 //       wordHolder = document.getElementById('hold');
 //       correct = document.createElement('ul');
 
-//       for (var i = 0; i < word.length; i++) {
+//       for (let i = 0; i < word.length; i++) {
 //         correct.setAttribute('id', 'my-word');
 //         guess = document.createElement('li');
 //         guess.setAttribute('class', 'guess');
@@ -161,7 +167,7 @@ document.addEventListener('keypress', (event) => {
 //       if (lives < 1) {
 //         showLives.innerHTML = "Game Over";
 //       }
-//       for (var i = 0; i < geusses.length; i++) {
+//       for (let i = 0; i < geusses.length; i++) {
 //         if (counter + space === geusses.length) {
 //           showLives.innerHTML = "You Win!";
 //         }
@@ -169,8 +175,8 @@ document.addEventListener('keypress', (event) => {
 //     }
 
 //         // Animate man
-//     var animate = function () {
-//       var drawMe = lives ;
+//     let animate = function () {
+//       let drawMe = lives ;
 //       drawArray[drawMe]();
 //     }
 
@@ -242,16 +248,16 @@ document.addEventListener('keypress', (event) => {
 //     // OnClick Function
 //      check = function () {
 //       list.onclick = function () {
-//         var geuss = (this.innerHTML);
+//         let geuss = (this.innerHTML);
 //         this.setAttribute("class", "active");
 //         this.onclick = null;
-//         for (var i = 0; i < word.length; i++) {
+//         for (let i = 0; i < word.length; i++) {
 //           if (word[i] === geuss) {
 //             geusses[i].innerHTML = geuss;
 //             counter += 1;
 //           } 
 //         }
-//         var j = (word.indexOf(geuss));
+//         let j = (word.indexOf(geuss));
 //         if (j === -1) {
 //           lives -= 1;
 //           comments();

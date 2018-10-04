@@ -42,7 +42,7 @@ body {
     padding: 20px 10px;
 }
 
-#wins, #guesses, #lettersGuessed {
+#wins, #guesses, #lettersGuessed, #underscore {
   text-align: left;
 }
 
