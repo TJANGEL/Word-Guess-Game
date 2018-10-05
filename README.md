@@ -6,7 +6,7 @@ Press any key to guess the horror movie villian's names
 
 When you win a picture of Freddy Kreuger shows up on the right side of the screen
 
-When you lose a picture of Jackie breaking through the door appers
+When you lose a picture of Pennywise appears
 
 Each time you win, your wins counter increases by one and holds a tally
 
