@@ -1,273 +1,77 @@
 * {
-  padding: 0;
-  margin; 0;
-}
-
-.jumbotron {
-    color: orange;
-    background: black;
-    padding: 30px;
-    text-align: center;
-    font-family: 'Chicle', cursive;
-}
-
-body {
-    background-image: url("/assets/images/haunted-houses.jpg");
-    background-size: cover;
-}
-
-.display-4 {
-    font-size: 80px;
-}
-
-.lead {
-    font-size: 60px;
-}
-
-#instructions {
-  font-size: 30px;
-}
-
-.container-main {
-    text-align: center;
-    margin-left: 260px;
-    color: orange;
-    font-family: 'Concert One', cursive;
-}
-
-.col-md-5 {
-    border: 8px solid maroon;
-    font-size: 30px;
-    padding: 20px 10px;
-}
-
-#wins, #guesses, #lettersGuessed, #underscore {
-  text-align: left;
-}
-
-#footer {
-  text-align: center;
-  Padding: 20px;
-  margin: 0 auto;
-  margin-top: 180px;
-  background: black;
-  clear: both;
-  color: orange;
-  font-family: 'Chicle'
-}
-
-/* .letter-button-color {
-  color: darkcyan;
-}
-
-.fridge-color {
-  color: orange;
-}
-
-#display {
-  margin-top: 78px;
-  height: 500px;
-  width: 220px;
-  margin-left: 60px;
-}
-
-#buttons {
-  padding-top: 60px;
-}
-
-#clear {
-  margin-left: 20px;
-  font-size: 25px;
-  color: black;
-  border-style: solid;
-  width: 100px;
-} */
-
-/* NOT MY CODE */
-/* Variables  
-$orange: #ffa600;
-$green: #c1d72e;
-$blue: #82d2e5;
-$grey:#f3f3f3;
-$white: #fff;
-$base-color:$green ;
-
-/* Mixin's */ 
-
-/* @mixin transition {
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-}
-
-@mixin clear {
-  &:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-}
-
- @mixin box-size {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
- @mixin transition {
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-@mixin fade {
-  -moz-transition: all 1s ease-in;
-  -moz-transition:all 0.3s ease-in-out;
-  -webkit-transition:all 0.3s ease-in-out;
-}
-
-@mixin opacity {
-  opacity:0.4;
-  filter:alpha(opacity=40); 
-  @include fade;
-}
-
-@mixin corners ($radius) {
-  -moz-border-radius: $radius;
-  -webkit-border-radius: $radius;
-  border-radius: $radius; 
-  -khtml-border-radius: $radius; 
-}
-
-body {
-  background:$base-color;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-  color:$white;
-  height:100%;
-  text-align:center;
-  font-size:18px;
-}
-
-.wrappper{
-  @include clear;
-  width:100%;
-  margin:0 auto;
-}
-
-
-canvas{
-  color:$white;
-  border: $white dashed 2px;
-  padding:15px;
-}
-
-h1, h2, h3 {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 100;
-	text-transform: uppercase;
-   margin:5px 0;
-}
-
-h1 {
-	font-size: 2.6em;
-}
-
-h2 {
-	font-size: 1.6em;
-}
-
-p{
-  font-size: 1.6em;
-}
-
-#alphabet {
-  @include clear;
-  margin:15px auto;
-  padding:0;
-  max-width:900px;
-}
-
-#alphabet li {
-  float:left;
-  margin: 0 10px 10px 0;
-  list-style:none;
-  width:35px;
-  height:30px;
-  padding-top:10px;
-  background:$white;
-  color:$base-color;
-  cursor:pointer;
-  @include corners(5px);
-  border: solid 1px $white;
-    
-    &:hover{
-      background:$base-color;
-      border: solid 1px $white;
-      color:$white;
-    }
-}
-
-#my-word {
-  margin: 0;
-  display: block;
-  padding: 0;
-  display:block;
-}
-
-#my-word li {
-  position: relative;
-  list-style: none;
-  margin: 0;
-  display: inline-block;
-  padding: 0 10px;
-  font-size:1.6em;
-}
-
-.active {
-  @include opacity;
-  cursor:default;
-    
-  &:hover{
-      @include fade;
-      @include opacity;
-    }
-}
-
-#mylives{
-  font-size:1.6em;
-  text-align:center;
-  display:block;
-}
-
-button{
-  @include corners (5px);
-  background:$base-color;
-  color:$white;
-  border: solid 1px $white;
-  text-decoration:none;
-  cursor:pointer;
-  font-size:1.2em;
-  padding:18px 10px;
-  width:180px;
-  margin: 10px;
-  outline: none;
+    padding: 0;
+    margin; 0;
+  }
   
-    &:hover{
-      @include transition;
-      background:$white;
-      border: solid 1px $white;
-      color:$base-color;
-    }
-}
+  .jumbotron {
+      color: orange;
+      background: black;
+      padding: 30px;
+      text-align: center;
+      font-family: 'Chicle', cursive;
+      margin: 0px 210px;
+  }
+  
+  body {
+      background-image: url("/assets/images/haunted-houses.jpg");
+      background-size: cover;
+  }
+  
+  .display-4 {
+      font-size: 80px;
+  }
+  
+  .lead {
+      font-size: 60px;
+  }
+  
+  #instructions {
+    font-size: 30px;
+  }
+  
+  .container-main {
+      text-align: center;
+      margin-left: 240px;
+      color: orange;
+      font-family: 'Concert One', cursive;
+  }
+  
+  .col-md-5 {
+      border: 8px solid maroon;
+      padding: 20px 10px;
+  }
+  
+  .col-md-5 gameplay-column {
+      font-size: 30px;
+      text-align: center;
+  } 
 
-@media (max-width: 767px) {
-  #alphabet {
-  padding:0 0 0 15px;
-}
+
+  #totalWins, #currentWord, #remainingGuesses, #guessedLetters {
+      font-size: 30px;
+  }
+  
+  #youwin-image {
+      margin: 0 auto;
+      width: 300px;
+      height: 400px;
   }
 
-  @media (max-width: 480px) {
-  #alphabet {
-  padding:0 0 0 25px;
-}
-  } */
+  #gameover-image {
+    margin: 0 auto;
+    width: 300px;
+    height: 400px;
+  }
+
+  #footer {
+    text-align: center;
+    Padding: 20px;
+    margin: 0 auto;
+    margin-top: 100px;
+    background: black;
+    clear: both;
+    color: orange;
+    font-family: 'Chicle';
+    margin-left: 105px;
+    margin-right: 105px;
+  }

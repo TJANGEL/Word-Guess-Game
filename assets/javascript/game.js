@@ -1,387 +1,157 @@
-// Global Variables
-// ====================================================
-// Create array of names
-const word = [
-    "freddy",
-    "jason",
-    "dracula",
-    "frankenstein",
-    "pennywise",
-    "clown",
-    "ghost",
-    "samara",
-    "michael myers"
-];
+var selectableWords =           // Word list
+    [
+        "freddy",
+        "jason",
+        "dracula",
+        "frankenstein",
+        "pennywise",
+        "clown",
+        "ghost",
+        "samara",
+        // "michael-myers",
+        "jigsaw",
+        // "gill-man",
+        "sil",
+        "tall-man",
+        // "david-kessler",
+        "it",
+        "pinhead",
+        "babadook",
+        "henry",
+        // "john-doe",
+        "pazuzu",
+        // "the-thing",
+        "leatherface",
+        "carrie",
+        "chromeskull",
+        "pumpkinhead",
+        // "captain-spaulding",
+        "mummy",
+        "ghostface",
+        "chucky",
 
-// Choose word randomly
-let randNum = Math.floor(Math.random() * word.length);
-let chosenWord = word[randNum];
-let rightWord = [];
-let wrongWord = [];
-let underScore = [];
-let lettersGuessed = [];
-let guesses = 6;
+    ];
 
-// Dom manipulation
-let docUnderScore = document.getElementById('underscore');
-let doclettersGuessed = document.getElementById('lettersGuessed');
+const maxTries = 10;            // Maximum number of tries player has
 
-// testing
-console.log(chosenWord);
+var guessedLetters = [];        // Stores the letters the user guessed
+var currentWordIndex;           // Index of the current word in the array
+var guessingWord = [];          // This will be the word we actually build to match the current word
+var remainingGuesses = 0;       // How many tries the player has left
+var gameStarted = false;        // Flag to tell if the game has started
+var hasFinished = false;        // Flag for 'press any key to try again'     
+var wins = 0;                   // How many wins has the player racked up
 
-// Main
-// ==================================================================
-// Create underscores based on word length
-let generateUnderscore = () => {
-    for (let i = 0; i < chosenWord.length; i++) {
-        underScore.push('_');
+// Reset our game-level variables
+function resetGame() {
+    remainingGuesses = maxTries;
+    gameStarted = false;
+
+    // Use Math.floor to round the random number down to the nearest whole.
+    currentWordIndex = Math.floor(Math.random() * (selectableWords.length));
+
+    // Clear out arrays
+    guessedLetters = [];
+    guessingWord = [];
+
+    // Make sure the hangman image is cleared
+    document.getElementById("hangmanImage").src = "";
+
+    // Build the guessing word and clear it out
+    for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
+        guessingWord.push("_");
     }
-    return underScore;
-}
+    // Hide game over and win images/text
+    document.getElementById("pressKeyTryAgain").style.cssText = "display: none";
+    document.getElementById("gameover-image").style.cssText = "display: none";
+    document.getElementById("youwin-image").style.cssText = "display: none";
 
-// testing
-console.log(generateUnderscore());
+    // Show display
+    updateDisplay();
+};
 
-// Get users guess
-document.addEventListener('keyup', (event) => {
-    let keycode = event.keyCode;
-    let keyWord = String.fromCharCode(keyCode);
-    // if users guess is right
-    if (chosenWord.indexOf(keyWord) > -1) {
-        // add to rightWord Array
-        rightWord.push(keyWord);
-        // replace underscore with correctly guessed letter
-        underScore[chosenWord.indexOf(keyWord)] = keyWord;
-        docUnderScore[0].innerHTML = underScore.join(' ');
-        doclettersGuessed[0].innerHTML = lettersGuessed;
-        // Checks to see if user word matches guesses
-        if (underScore.join('') == chosenWord) {
-           alert('You Win!');
-        }
+//  Updates the display on the HTML Page
+function updateDisplay() {
+
+    document.getElementById("totalWins").innerText = wins;
+    document.getElementById("currentWord").innerText = "";
+    for (var i = 0; i < guessingWord.length; i++) {
+        document.getElementById("currentWord").innerText += guessingWord[i];
+    }
+    document.getElementById("remainingGuesses").innerText = remainingGuesses;
+    document.getElementById("guessedLetters").innerText = guessedLetters;
+    if (remainingGuesses <= 0) {
+        document.getElementById("gameover-image").style.cssText = "display: block";
+        document.getElementById("pressKeyTryAgain").style.cssText = "display:block";
+        hasFinished = true;
+    }
+};
+
+// Updates the image depending on how many guesses
+function updateHangmanImage() {
+    document.getElementById("hangmanImage").src = "assets/images/" + (maxTries - remainingGuesses) + ".png";
+};
+
+document.onkeydown = function (event) {
+    // If we finished a game, dump one keystroke and reset.
+    if (hasFinished) {
+        resetGame();
+        hasFinished = false;
     } else {
-        wrongWord.push(keyWord);
-        // testing
-        console.log(wrongWord);
+        // Check to make sure a-z was pressed.
+        if (event.keyCode >= 65 && event.keyCode <= 90) {
+            makeGuess(event.key.toLowerCase());
+        }
     }
-});
-
-
-// $(document).ready(function() {
-
-//     // Here we are provided an initial array of letters.
-//     // Use this array to dynamically create buttons on the screen.
-//     var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_"];
-
-//     // MAJOR TASK #1: DYNAMICALLY CREATE BUTTONS
-//     // =================================================================================
-
-//     // 1. Create a for-loop to iterate through the letters array.
-//     for (var i = 0; i < letters.length; i++) {
-
-//       // Inside the loop...
-
-//       // 2. Create a variable named "letterBtn" equal to $("<button>");
-//       var letterBtn = $("<button>");
-
-//       // 3. Then give each "letterBtn" the following classes: "letter-button" "letter" "letter-button-color".
-//       letterBtn.addClass("letter-button letter letter-button-color");
-
-//       // 4. Then give each "letterBtn" a data-attribute called "data-letter".
-//       letterBtn.attr("data-letter", letters[i]);
-
-//       // 5. Then give each "letterBtns" a text equal to "letters[i]".
-//       letterBtn.text(letters[i]);
-
-//       // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
-//       $("#buttons").append(letterBtn);
-
-//     }
-
-//     // Be sure to test that your code works for this major task, before proceeding to the next one!
-
-//     // MAJOR TASK #2: ATTACH ON-CLICK EVENTS TO "LETTER" BUTTONS
-//     // =================================================================================
-
-//     // 7. Create an "on-click" event attached to the ".letter-button" class.
-//     $(".letter-button").on("click", function() {
-
-//       // Inside the on-click event...
-
-//       // 8. Create a variable called "fridgeMagnet" and set the variable equal to a new div.
-//       var fridgeMagnet = $("<div>");
-
-//       // 9. Give each "fridgeMagnet" the following classes: "letter fridge-color".
-//       fridgeMagnet.addClass("letter fridge-color");
-
-//       // 10. Then chain the following code onto the "fridgeMagnet" variable: .text($(this).attr("data-letter"))
-//       // attr acts as both a setter and a getter for attributes depending on whether we supply one argument or two
-//       // NOTE: There IS a $(data) jQuery method, but it doesn't do what you'd expect. So just use attr.
-//       fridgeMagnet.text($(this).attr("data-letter"));
-
-//       // 11. Lastly append the fridgeMagnet variable to the "#display" div (provided);
-//       // Again you can see we use that find, and once its found we append the item
-//       $("#display").append(fridgeMagnet);
-
-//     });
-
-//     // Be sure to test that your code works for this major task, before proceeding to the next one!
-
-//     // MAJOR TASK #3: ATTACH ON-CLICK EVENTS TO "CLEAR" BUTTON
-//     // =================================================================================
-
-//     // 12. Create an "on-click" event attached to the "#clear" button id.
-//     $("#clear").on("click", function() {
-
-//       // Inside the on-click event...
-
-//       // 13. Use the jQuery "empty()" method to clear the contents of the "#display" div.
-//       // We use find here and once its found it will empty the element
-//       $("#display").empty();
-
-//     });
-
-//   });
-
-// docUnderScore[0].innerHTML = generateUnderscore().join(' ');
-// wrongWord.push(keyWord);
-// let lettersGuessed = document.getElementById('lettersGuessed');
-
-
-// let answerArray = [];
-// for (let i = 0; i < chosenWord.length; i++) {
-//     answerArray[i] = "_";
-// }
-
-// let remainingLetters = word.length;
-
-// // Shows user's current progress:
-// (answerArray.join(" "));
-
-// Updates game status after user guesses letter:
-// for (let j = 0; j < word.length; j++) {
-//     if (word[j] === guess) {
-//         answerArray[j] = guess;
-//         remainingLetters--;
-//     }
-// }
-// NOT MY CODE
-// window.onload = function () {
-
-//     let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-//           'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-//           't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
-//     let categories;         // Array of topics
-//     let chosenCategory;     // Selected catagory
-//     let getHint ;          // Word getHint
-//     let word ;              // Selected word
-//     let guess ;             // Geuss
-//     let geusses = [ ];      // Stored geusses
-//     let lives ;             // Lives
-//     let counter ;           // Count correct geusses
-//     let space;              // Number of spaces in word '-'
-
-//     // Get elements
-//     let showLives = document.getElementById("mylives");
-//     let showCatagory = document.getElementById("scatagory");
-//     let getHint = document.getElementById("hint");
-//     let showClue = document.getElementById("clue");
-
-
-
-//     // create alphabet ul
-//     let buttons = function () {
-//       myButtons = document.getElementById('buttons');
-//       letters = document.createElement('ul');
-
-//       for (let i = 0; i < alphabet.length; i++) {
-//         letters.id = 'alphabet';
-//         list = document.createElement('li');
-//         list.id = 'letter';
-//         list.innerHTML = alphabet[i];
-//         check();
-//         myButtons.appendChild(letters);
-//         letters.appendChild(list);
-//       }
-//     }
-
-
-//     // Select Catagory
-//     let selectCat = function () {
-//       if (chosenCategory === categories[0]) {
-//         catagoryName.innerHTML = "The Chosen Category Is Premier League Football Teams";
-//       } else if (chosenCategory === categories[1]) {
-//         catagoryName.innerHTML = "The Chosen Category Is Films";
-//       } else if (chosenCategory === categories[2]) {
-//         catagoryName.innerHTML = "The Chosen Category Is Cities";
-//       }
-//     }
-
-//     // Create geusses ul
-//      result = function () {
-//       wordHolder = document.getElementById('hold');
-//       correct = document.createElement('ul');
-
-//       for (let i = 0; i < word.length; i++) {
-//         correct.setAttribute('id', 'my-word');
-//         guess = document.createElement('li');
-//         guess.setAttribute('class', 'guess');
-//         if (word[i] === "-") {
-//           guess.innerHTML = "-";
-//           space = 1;
-//         } else {
-//           guess.innerHTML = "_";
-//         }
-
-//         geusses.push(guess);
-//         wordHolder.appendChild(correct);
-//         correct.appendChild(guess);
-//       }
-//     }
-
-//     // Show lives
-//      comments = function () {
-//       showLives.innerHTML = "You have " + lives + " lives";
-//       if (lives < 1) {
-//         showLives.innerHTML = "Game Over";
-//       }
-//       for (let i = 0; i < geusses.length; i++) {
-//         if (counter + space === geusses.length) {
-//           showLives.innerHTML = "You Win!";
-//         }
-//       }
-//     }
-
-//         // Animate man
-//     let animate = function () {
-//       let drawMe = lives ;
-//       drawArray[drawMe]();
-//     }
-
-
-//     // Hangman
-//     canvas =  function(){
-
-//       myStickman = document.getElementById("stickman");
-//       context = myStickman.getContext('2d');
-//       context.beginPath();
-//       context.strokeStyle = "#fff";
-//       context.lineWidth = 2;
-//     };
-
-//       head = function(){
-//         myStickman = document.getElementById("stickman");
-//         context = myStickman.getContext('2d');
-//         context.beginPath();
-//         context.arc(60, 25, 10, 0, Math.PI*2, true);
-//         context.stroke();
-//       }
-
-//     draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-
-//       context.moveTo($pathFromx, $pathFromy);
-//       context.lineTo($pathTox, $pathToy);
-//       context.stroke(); 
-//   }
-
-//      frame1 = function() {
-//        draw (0, 150, 150, 150);
-//      };
-
-//      frame2 = function() {
-//        draw (10, 0, 10, 600);
-//      };
-
-//      frame3 = function() {
-//        draw (0, 5, 70, 5);
-//      };
-
-//      frame4 = function() {
-//        draw (60, 5, 60, 15);
-//      };
-
-//      torso = function() {
-//        draw (60, 36, 60, 70);
-//      };
-
-//      rightArm = function() {
-//        draw (60, 46, 100, 50);
-//      };
-
-//      leftArm = function() {
-//        draw (60, 46, 20, 50);
-//      };
-
-//      rightLeg = function() {
-//        draw (60, 70, 100, 100);
-//      };
-
-//      leftLeg = function() {
-//        draw (60, 70, 20, 100);
-//      };
-
-//     drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
-
-
-//     // OnClick Function
-//      check = function () {
-//       list.onclick = function () {
-//         let geuss = (this.innerHTML);
-//         this.setAttribute("class", "active");
-//         this.onclick = null;
-//         for (let i = 0; i < word.length; i++) {
-//           if (word[i] === geuss) {
-//             geusses[i].innerHTML = geuss;
-//             counter += 1;
-//           } 
-//         }
-//         let j = (word.indexOf(geuss));
-//         if (j === -1) {
-//           lives -= 1;
-//           comments();
-//           animate();
-//         } else {
-//           comments();
-//         }
-//       }
-//     }
-
-
-//     // Play
-//     play = function () {
-//       categories = [
-//           ["everton", "liverpool", "swansea", "chelsea", "hull", "manchester-city", "newcastle-united"],
-//           ["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
-//           ["manchester", "milan", "madrid", "amsterdam", "prague"]
-//       ];
-
-//       chosenCategory = categories[Math.floor(Math.random() * categories.length)];
-//       word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
-//       word = word.replace(/\s/g, "-");
-//       console.log(word);
-//       buttons();
-
-//       geusses = [ ];
-//       lives = 10;
-//       counter = 0;
-//       space = 0;
-//       result();
-//       comments();
-//       selectCat();
-//       canvas();
-//     }
-
-//     play();
-
-//      // Reset
-
-//     document.getElementById('reset').onclick = function() {
-//       correct.parentNode.removeChild(correct);
-//       letters.parentNode.removeChild(letters);
-//       showClue.innerHTML = "";
-//       context.clearRect(0, 0, 400, 400);
-//       play();
-//     }
-//   }
-
-
+};
+
+function makeGuess(letter) {
+    if (remainingGuesses > 0) {
+        if (!gameStarted) {
+            gameStarted = true;
+        }
+
+        // Make sure we didn't use this letter yet
+        if (guessedLetters.indexOf(letter) === -1) {
+            guessedLetters.push(letter);
+            evaluateGuess(letter);
+        }
+    }
+
+    updateDisplay();
+    checkWin();
+};
+
+// This function takes a letter and finds all instances of 
+// appearance in the string and replaces them in the guess word.
+function evaluateGuess(letter) {
+    // Array to store positions of letters in string
+    var positions = [];
+
+    // Loop through word finding all instances of guessed letter, store the indicies in an array.
+    for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
+        if (selectableWords[currentWordIndex][i] === letter) {
+            positions.push(i);
+        }
+    }
+
+    // if there are no indicies, remove a guess and update the hangman image
+    if (positions.length <= 0) {
+        remainingGuesses--;
+        updateHangmanImage();
+    } else {
+        // Loop through all the indicies and replace the '_' with a letter.
+        for (var i = 0; i < positions.length; i++) {
+            guessingWord[positions[i]] = letter;
+        }
+    }
+};
+
+function checkWin() {
+    if (guessingWord.indexOf("_") === -1) {
+        document.getElementById("youwin-image").style.cssText = "display: block";
+        document.getElementById("pressKeyTryAgain").style.cssText = "display: block";
+        wins++;
+        hasFinished = true;
+    }
+};
