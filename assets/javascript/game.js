@@ -8,24 +8,24 @@ var selectableWords =           // Word list
         "clown",
         "ghost",
         "samara",
-        // "michael-myers",
+        "michael-myers",
         "jigsaw",
-        // "gill-man",
+        "gill-man",
         "sil",
         "tall-man",
-        // "david-kessler",
+        "david-kessler",
         "it",
         "pinhead",
         "babadook",
         "henry",
-        // "john-doe",
+        "john-doe",
         "pazuzu",
-        // "the-thing",
+        "the-thing",
         "leatherface",
         "carrie",
         "chromeskull",
         "pumpkinhead",
-        // "captain-spaulding",
+        "captain-spaulding",
         "mummy",
         "ghostface",
         "chucky",
@@ -98,8 +98,8 @@ document.onkeydown = function (event) {
         resetGame();
         hasFinished = false;
     } else {
-        // Check to make sure a-z was pressed.
-        if (event.keyCode >= 65 && event.keyCode <= 90) {
+        // Check to make sure a-z including - was pressed.
+        if (event.keyCode >= 65 || event.keyCode <= 90 || event.keyCode ==109) {
             makeGuess(event.key.toLowerCase());
         }
     }
