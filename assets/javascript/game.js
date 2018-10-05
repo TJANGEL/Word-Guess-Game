@@ -8,24 +8,20 @@ var selectableWords =
         "clown",
         "ghost",
         "samara",
-        "michael-myers",
+        // "michael-myers",
         "jigsaw",
-        "gill-man",
+        // "gill-man",
         "sil",
-        "tall-man",
-        "david-kessler",
         "it",
         "pinhead",
         "babadook",
-        "henry",
-        "john-doe",
         "pazuzu",
-        "the-thing",
+        // "the-thing",
         "leatherface",
         "carrie",
         "chromeskull",
         "pumpkinhead",
-        "captain-spaulding",
+        // "captain-spaulding",
         "mummy",
         "ghostface",
         "chucky",
@@ -88,7 +84,7 @@ document.onkeydown = function (event) {
         resetGame();
         hasFinished = false;
     } else {
-        if (event.keyCode >= 65 || event.keyCode <= 90 || event.keyCode ==109) {
+        if (event.keyCode >= 65 && event.keyCode <= 90) {
             makeGuess(event.key.toLowerCase());
         }
     }

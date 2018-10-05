@@ -57,8 +57,10 @@
 
   #gameover-image {
     margin: 0 auto;
-    width: 300px;
-    height: 400px;
+    width: 350px;
+    height: 450px;
+    padding-top: 50px;
+    padding-bottom: 30px;
   }
 
   #footer {
