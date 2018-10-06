@@ -76,7 +76,23 @@ body {
   }
 
 @media  only screen and (max-width: 980px) {
-
+    .container-main {
+        margin-top: -50px;
+        margin-left: 80px;
+        margin-bottom: 50px;
+        width: 95%;
+        float:left;
+    }
+    
+    #youwin-image {
+        width: 200px;
+        height: 300px;
+    }
+    
+    #gameover-image {
+        width: 200px;
+        height: 300px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -116,10 +132,6 @@ body {
     #gameover-image {
         width: 500px;
         height: 600px;
-    }
-
-    .col-md-5 {
-        border: none;
     }
 
 }
