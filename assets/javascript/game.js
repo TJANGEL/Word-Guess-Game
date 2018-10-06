@@ -1,5 +1,5 @@
 
-var selectableWords =
+var possibleNames =
     [
         "freddy",
         "jason",
@@ -29,7 +29,7 @@ var selectableWords =
 
     ];
 
-const maxTries = 10;
+const maxGuesses = 10;
 
 var guessedLetters = [];
 var currentWordIndex;
@@ -40,17 +40,15 @@ var hasFinished = false;
 var wins = 0;
 
 function resetGame() {
-    remainingGuesses = maxTries;
+    remainingGuesses = maxGuesses;
     gameStarted = false;
 
-    currentWordIndex = Math.floor(Math.random() * (selectableWords.length));
+    currentWordIndex = Math.floor(Math.random() * (possibleNames.length));
 
     guessedLetters = [];
     guessingWord = [];
 
-    // document.getElementById("hangmanImage").src = "";
-
-    for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
+    for (var i = 0; i < possibleNames[currentWordIndex].length; i++) {
         guessingWord.push("_");
     }
     document.getElementById("pressKeyTryAgain").style.cssText = "display: none";
@@ -75,10 +73,6 @@ function updateDisplay() {
         hasFinished = true;
     }
 };
-
-// function updateHangmanImage() {
-//     document.getElementById("hangmanImage").src = "assets/images/" + (maxTries - remainingGuesses) + ".png";
-// };
 
 document.onkeydown = function (event) {
     if (hasFinished) {
@@ -111,15 +105,14 @@ function evaluateGuess(letter) {
 
     var positions = [];
 
-    for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
-        if (selectableWords[currentWordIndex][i] === letter) {
+    for (var i = 0; i < possibleNames[currentWordIndex].length; i++) {
+        if (possibleNames[currentWordIndex][i] === letter) {
             positions.push(i);
         }
     }
 
     if (positions.length <= 0) {
         remainingGuesses--;
-        // updateHangmanImage();
     } else {
         for (var i = 0; i < positions.length; i++) {
             guessingWord[positions[i]] = letter;
