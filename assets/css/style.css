@@ -73,7 +73,7 @@ body {
     clear: both;
     color: orange;
     font-family: 'Chicle';
-  }
+}
 
 @media  only screen and (max-width: 980px) {
     .container-main {
@@ -117,7 +117,7 @@ body {
 @media only screen and (max-width: 640px) {
     .container-main {
         margin-top: 20px;
-        margin-left: 40px;
+        margin-left: 20px;
         margin-right: 130px;
         width: 88%;
         float:left;
