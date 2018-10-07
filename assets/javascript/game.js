@@ -32,8 +32,8 @@ var possibleNames =
 const maxGuesses = 10;
 
 var guessedLetters = [];
-var currentWordIndex;
-var guessingWord = [];
+var currentNameIndex;
+var guessingName = [];
 var remainingGuesses = 0;
 var gameStarted = false;
 var hasFinished = false;
@@ -43,13 +43,13 @@ function resetGame() {
     remainingGuesses = maxGuesses;
     gameStarted = false;
 
-    currentWordIndex = Math.floor(Math.random() * (possibleNames.length));
+    currentNameIndex = Math.floor(Math.random() * (possibleNames.length));
 
     guessedLetters = [];
-    guessingWord = [];
+    guessingName = [];
 
-    for (var i = 0; i < possibleNames[currentWordIndex].length; i++) {
-        guessingWord.push("_");
+    for (var i = 0; i < possibleNames[currentNameIndex].length; i++) {
+        guessingName.push("_");
     }
     document.getElementById("youSurvivedThisNightmare").style.cssText = "display: none";
     document.getElementById("gameover-image").style.cssText = "display: none";
@@ -63,8 +63,8 @@ function updateDisplay() {
 
     document.getElementById("totalWins").innerText = wins;
     document.getElementById("currentWord").innerText = "";
-    for (var i = 0; i < guessingWord.length; i++) {
-        document.getElementById("currentWord").innerText += guessingWord[i];
+    for (var i = 0; i < guessingName.length; i++) {
+        document.getElementById("currentWord").innerText += guessingName[i];
     }
     document.getElementById("remainingGuesses").innerText = remainingGuesses;
     document.getElementById("guessedLetters").innerText = guessedLetters;
@@ -106,8 +106,8 @@ function evaluateGuess(letter) {
 
     var positions = [];
 
-    for (var i = 0; i < possibleNames[currentWordIndex].length; i++) {
-        if (possibleNames[currentWordIndex][i] === letter) {
+    for (var i = 0; i < possibleNames[currentNameIndex].length; i++) {
+        if (possibleNames[currentNameIndex][i] === letter) {
             positions.push(i);
         }
     }
@@ -116,13 +116,13 @@ function evaluateGuess(letter) {
         remainingGuesses--;
     } else {
         for (var i = 0; i < positions.length; i++) {
-            guessingWord[positions[i]] = letter;
+            guessingName[positions[i]] = letter;
         }
     }
 };
 
 function checkWin() {
-    if (guessingWord.indexOf("_") === -1) {
+    if (guessingName.indexOf("_") === -1) {
         document.getElementById("youwin-image").style.cssText = "display: block";
         document.getElementById("youSurvivedThisNightmare").style.cssText = "display: block";
         wins++;
