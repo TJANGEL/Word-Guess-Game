@@ -13,6 +13,7 @@
   
 body {
     background-image: url(http://i64.tinypic.com/jt8fhf.jpg);
+    background-size: cover;
 }
   
 .display-4 {
