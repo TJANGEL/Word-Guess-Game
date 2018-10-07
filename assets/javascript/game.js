@@ -51,9 +51,10 @@ function resetGame() {
     for (var i = 0; i < possibleNames[currentWordIndex].length; i++) {
         guessingWord.push("_");
     }
-    document.getElementById("pressKeyTryAgain").style.cssText = "display: none";
+    document.getElementById("youSurvivedThisNightmare").style.cssText = "display: none";
     document.getElementById("gameover-image").style.cssText = "display: none";
     document.getElementById("youwin-image").style.cssText = "display: none";
+    document.getElementById("weAllFloatDownHere").style.cssText = "display: none";
 
     updateDisplay();
 };
@@ -69,7 +70,7 @@ function updateDisplay() {
     document.getElementById("guessedLetters").innerText = guessedLetters;
     if (remainingGuesses <= 0) {
         document.getElementById("gameover-image").style.cssText = "display: block";
-        document.getElementById("pressKeyTryAgain").style.cssText = "display:block";
+        document.getElementById("weAllFloatDownHere").style.cssText = "display:block";
         hasFinished = true;
     }
 };
@@ -123,7 +124,7 @@ function evaluateGuess(letter) {
 function checkWin() {
     if (guessingWord.indexOf("_") === -1) {
         document.getElementById("youwin-image").style.cssText = "display: block";
-        document.getElementById("pressKeyTryAgain").style.cssText = "display: block";
+        document.getElementById("youSurvivedThisNightmare").style.cssText = "display: block";
         wins++;
         hasFinished = true;
     }
